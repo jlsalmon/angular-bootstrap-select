@@ -1,7 +1,7 @@
 env: CI=true
 language: node_js
 node_js:
-  - "0.10"
+  - "0.12.7"
 branches:
   only:
     - master
@@ -15,4 +15,4 @@ script:
   - grunt test
 notifications:
   email:
-    - joaopintoneto@gmail.com
+    - quentin.lampin@gmail.com
