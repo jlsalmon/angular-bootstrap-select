@@ -21,12 +21,12 @@ module.exports = new Package('angular-bootstrap-select', [
     version: {
       isSnapshot: true,
       branch: 'master',
-      raw: 'v0.0.4',
+      raw: 'v0.1.0',
     },
-    versions: ['v0.0.2', 'v0.0.3', 'v0.0.4'],
+    versions: ['v0.0.2', 'v0.0.3', 'v0.0.4', 'v0.0.5','v0.1.0'],
     info: {
-      owner: 'joaoneto',
-      repo: 'angular-bootstrap-select',
+      owner: 'quentinlampin',
+      repo: 'angular-bootstrap-select-updated',
     }
   };
 })
