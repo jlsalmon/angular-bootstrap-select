@@ -1,6 +1,7 @@
 # Changelog
 ## 2015-07-15
 - merge pull-requests submitted by latata.
+
 ## 2015-01-02
 - fix(selectpicker) change value for track by ngOptions only (by João Neto <joaopintoneto@gmail.com>)
 - fix(selectpicker) changed styles to theme attr (by João Neto <joaopintoneto@gmail.com>)
