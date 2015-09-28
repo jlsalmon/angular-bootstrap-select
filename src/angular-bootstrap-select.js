@@ -181,10 +181,12 @@ function selectpickerDirective($parse, $timeout) {
     restrict: 'A',
     priority: 1000,
     link: function (scope, element, attrs) {
-      function refresh() {
+      function refresh(newVal) {
         scope.$applyAsync(function () {
-          if (attrs.ngOptions && / as .* track by/.test(attrs.ngOptions)) element.val(scope.ngModel);
+          //if (attrs.ngOptions && / as .* track by/.test(attrs.ngOptions)) element.val(scope.ngModel);
+          element.val(newVal);
           element.selectpicker('refresh');
+          element.selectpicker('render');
         });
       }
 
@@ -215,8 +217,8 @@ function selectpickerDirective($parse, $timeout) {
           element.selectpicker('destroy');
         });
       });
-        
-      if (attrs.ngOptions) {        
+
+      if (attrs.ngOptions) {
         var match = attrs.ngOptions.match(NG_OPTIONS_REGEXP);
         scope.$watch(match[7], refresh);
       }
