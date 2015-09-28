@@ -208,6 +208,9 @@ function selectpickerDirective($parse, $timeout) {
         // Deselect all when "close" button is clicked
         closeButton.bind('click', function () {
           element.selectpicker('deselectAll');
+          if (ngModel.$modelValue instanceof Array) {
+            ngModel.$setViewValue([]);
+          }
         });
 
         closeButton.tooltip({title: 'Deselect all', placement: 'right', container: 'body'});
