@@ -202,6 +202,15 @@ function selectpickerDirective($parse, $timeout) {
       $timeout(function () {
         element.selectpicker($parse(attrs.selectpicker)());
         element.selectpicker('refresh');
+
+        var closeButton = element.parent().find('.bootstrap-select').find('.close');
+
+        // Deselect all when "close" button is clicked
+        closeButton.bind('click', function () {
+          element.selectpicker('deselectAll');
+        });
+
+        closeButton.tooltip({title: 'Deselect all', placement: 'right', container: 'body'});
       });
 
       if (attrs.ngModel) {
