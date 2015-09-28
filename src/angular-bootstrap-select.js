@@ -179,8 +179,9 @@ function selectpickerDirective($parse, $timeout) {
 
   return {
     restrict: 'A',
+    require: "ngModel",
     priority: 1000,
-    link: function (scope, element, attrs) {
+    link: function (scope, element, attrs, ngModel) {
       function refresh(newVal) {
         scope.$applyAsync(function () {
           //if (attrs.ngOptions && / as .* track by/.test(attrs.ngOptions)) element.val(scope.ngModel);
