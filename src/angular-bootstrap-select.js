@@ -208,6 +208,10 @@ function selectpickerDirective($parse, $timeout) {
         scope.$watch(attrs.ngModel, refresh, true);
       }
 
+      if (attrs.selectModel) {
+        scope.$watch(attrs.selectModel, refresh, true);
+      }
+
       if (attrs.ngDisabled) {
         scope.$watch(attrs.ngDisabled, refresh, true);
       }
