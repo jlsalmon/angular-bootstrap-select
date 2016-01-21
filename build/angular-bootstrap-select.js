@@ -179,12 +179,15 @@ function selectpickerDirective($parse, $timeout) {
 
   return {
     restrict: 'A',
+    require: "ngModel",
     priority: 1000,
-    link: function (scope, element, attrs) {
-      function refresh() {
+    link: function (scope, element, attrs, ngModel) {
+      function refresh(newVal) {
         scope.$applyAsync(function () {
-          if (attrs.ngOptions && / as .* track by/.test(attrs.ngOptions)) element.val(scope.ngModel);
+          //if (attrs.ngOptions && / as .* track by/.test(attrs.ngOptions)) element.val(scope.ngModel);
+          element.val(newVal);
           element.selectpicker('refresh');
+          element.selectpicker('render');
         });
       }
 
@@ -200,10 +203,26 @@ function selectpickerDirective($parse, $timeout) {
       $timeout(function () {
         element.selectpicker($parse(attrs.selectpicker)());
         element.selectpicker('refresh');
+
+        var closeButton = element.parent().find('.bootstrap-select').find('.close');
+
+        // Deselect all when "close" button is clicked
+        closeButton.bind('click', function () {
+          element.selectpicker('deselectAll');
+          if (ngModel.$modelValue instanceof Array) {
+            ngModel.$setViewValue([]);
+          }
+        });
+
+        closeButton.tooltip({title: 'Deselect all', placement: 'right', container: 'body'});
       });
 
       if (attrs.ngModel) {
         scope.$watch(attrs.ngModel, refresh, true);
+      }
+
+      if (attrs.selectModel) {
+        scope.$watch(attrs.selectModel, refresh, true);
       }
 
       if (attrs.ngDisabled) {
@@ -215,8 +234,8 @@ function selectpickerDirective($parse, $timeout) {
           element.selectpicker('destroy');
         });
       });
-        
-      if (attrs.ngOptions) {        
+
+      if (attrs.ngOptions) {
         var match = attrs.ngOptions.match(NG_OPTIONS_REGEXP);
         scope.$watch(match[7], refresh);
       }
